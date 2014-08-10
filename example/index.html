@@ -1,0 +1,62 @@
+<!doctype html>
+<html ng-app="euclidRhythmApp">
+  <head>
+    <meta charset="utf-8">
+    <title>euclidean rhythm sample</title>
+    <script src="angular/angular.js"></script>
+    <script src="angular-touch/angular-touch.js"></script>
+    <script src="venturocket-angular-slider/build/angular-slider.js"></script>
+    <script src="euclid.js"></script>
+    <script src="app.js"></script>
+    <link href="app.css" media="all" rel="stylesheet" type="text/css" />
+  </head>
+  <body ng-controller="TrackListCtrl">
+    <div id="container">
+      <h1>euclidean rhythm sample</h1>
+      <div class="master" ng-controller="MasterCtrl">
+        <div class="button-parts">
+          <span class="param-name">start/stop</span>
+          <div class="button onoff" ng-class="{btnon: isSeqon()}" ng-click="$emit('seqOnOff')"></div>
+        </div>
+        <div class="button-parts">
+          <span class="param-name">reset</span>
+          <div class="button reset" ng-class="{btnon: isResetting()}" ng-mousedown="$emit('resetMousedown')" ng-mouseup="$emit('resetMouseup')"></div>
+        </div>
+        <div class="slider-parts">
+          <span class="param-name">bpm</span>
+          <div class="param-control">
+            <slider ng-model="bpm" floor="30" ceiling="200" step="1" ng-change="$emit('changeBpm')"></slider>
+          </div>
+        </div>
+      </div>
+      <div class="tracks">
+        <div class="track" ng-repeat="track in tracks"  ng-controller="TrackCtrl">
+          <div class="track-info"">
+            <div class="track-parts track-name">
+              {{track.name}}
+            </div>
+            <div class="track-parts">
+              <div class="slider-parts">
+                <span class="param-name">steps</span>
+                <div class="param-control">
+                  <slider ng-model="length" floor="0" ceiling="32" step="1" ng-change="$emit('changeLength')"></slider>
+                </div>
+              </div>
+              <div class="slider-parts">
+                <span class="param-name">pulses</span>
+                <div class="param-control">
+                  <slider ng-model="pulses" floor="0" ceiling="{{length}}" step="1"  ng-change="$emit('changePulses')"></slider>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="track-sequence">
+            <div class="step_bg" ng-repeat="step in steps track by $index"" ng-class="{current: isCurrent($index)}">
+              <div class="step" ng-class="{active: isActive($index)}"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

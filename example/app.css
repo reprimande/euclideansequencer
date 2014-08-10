@@ -1,0 +1,210 @@
+* {
+    font-family: sans-serif;
+}
+#container {
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    width:712px;
+}
+
+h1 {
+    font-size: 18px;
+    font-weight: bold;
+}
+.master {
+    height: 40px;
+    width: 50%;
+    border-radius:2px;
+    border-style:solid;
+    border-width:1px;
+    border-color:#563d7c;
+    color:#563d7c;
+    margin:1px;
+    box-sizing:border-box;
+}
+
+.button-parts {
+    float:left;
+    height:100%;
+    margin-left:10px;
+    padding-top:8px;
+    box-sizing:border-box;
+}
+
+.button-parts .param-name {
+    float:left;
+    margin:2px;
+}
+.button-parts .button {
+    float:left;
+}
+
+.master .onoff {
+    width:20px;
+    height:20px;
+    border-style: solid;
+    border-radius:2px;
+    border-width:1px;
+    float:left;
+}
+.master .reset {
+    width:20px;
+    height:20px;
+    border-style: solid;
+    border-radius:2px;
+    border-width:1px;
+    float:left;
+}
+
+.track {
+    width:100%;
+    border-radius:2px;
+    border-style:solid;
+    border-width:1px;
+    border-color:#563d7c;
+    color:#563d7c;
+    margin:1px;
+}
+
+.track-info {
+    overflow:hidden;
+    width:100%;
+    height: 36px;
+    vertical-align: middle;
+}
+
+.track-name {
+    width:10%;
+    font-weight:bold;
+    padding: 2px;
+}
+.track-parts {
+    float:left;
+}
+.slider-parts {
+    float:left;
+    padding-top:16px;
+    margin-left: 5px;
+}
+.slider-parts .param-name {
+    float:left;
+}
+.slider-parts .param-control {
+    float:left;
+    margin-left: 5px;
+}
+
+.track-sequence {
+    width:100%;
+    height: 30px;
+    padding: 4px;
+    box-size:border-box;
+    color:#ccc;
+}
+.step_bg {
+    border: solid 1px #777777;
+    width: 20px;
+    height: 20px;
+    background-color: #dddddd;
+    float: left;
+    border-radius: 2px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.current {
+    background-color: #FFFF99;
+}
+.step {
+    width: 16px;
+    height: 16px;
+    margin: 2px;
+    border-radius: 4px;
+}
+.active {
+    background-color: #ff1111;
+}
+.btnon {
+    background-color: #ff9977;
+}
+
+/* for ng-slider */
+slider {
+	display:     block;
+	position:    relative;
+	height:      16px;
+	width:       96px;
+}
+slider span.bar {
+	height:     50%;
+	z-index:    0;
+	background: #ccc;
+	left:       0;
+	top:        25%;
+	cursor:     pointer;
+}
+
+slider span.bar.selection, slider span.bar.unselected {
+}
+
+slider span.bar.selection {
+	background: #0a0;
+	opacity:    0.5;
+}
+
+slider span.bar.unselected {
+	width:      auto;
+	background: #a00;
+	opacity:    0.5;
+}
+
+slider span.pointer {
+	cursor:           pointer;
+	width:            7px;
+	top:              0;
+	bottom:           0;
+	background-color: #00a;
+}
+
+slider span.pointer:hover {
+}
+
+slider span.pointer.active {
+}
+
+slider span.bubble {
+	font-size:   0.7em;
+	line-height: 1.4em;
+	font-family: sans-serif;
+	text-align:  center;
+	text-shadow: none;
+	top:         -1.3em;
+	cursor:      pointer;
+}
+
+slider span.bubble.selection, slider span.bubble.limit {
+	top: 25%;
+}
+
+slider span.bubble.selection {
+}
+
+slider span.bubble.limit {
+}
+
+slider span.bubble.low, slider span.bubble.high {
+}
+
+::-ms-tooltip {
+	display: none;
+}
+
+#slider-container {
+	-webkit-touch-callout: none;
+	-webkit-user-select:   none;
+	-khtml-user-select:    none;
+	-moz-user-select:      -moz-none;
+	-ms-user-select:       none;
+	user-select:           none;
+}
