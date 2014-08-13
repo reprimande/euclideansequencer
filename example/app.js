@@ -1,26 +1,39 @@
-var Sampler = function(url) {
+var Sampler = function(ctx, url) {
+  this.ctx = ctx;
+  this.buffer = null;
   if (url) {
     this.load(url);
   }
 };
 Sampler.prototype = {
   load: function(url) {
-    var audio = new Audio(url);
-    this.audio = audio;
+    var that = this,
+        req = new XMLHttpRequest();
+    req.open('GET', url, true);
+    req.responseType = 'arraybuffer';
+    req.onload = function() {
+      that.ctx.decodeAudioData(req.response, function(buffer) {
+        that.buffer = buffer
+      });
+    };
+    req.send();
   },
   play: function() {
-    if (this.audio) {
-      this.audio.currentTime = 0;
-      this.audio.play();
+    if (this.buffer) {
+      var source = this.ctx.createBufferSource();
+      source.buffer = this.buffer;
+      source.connect(this.ctx.destination);
+      source.start(0);
     }
   }
 };
 
-var Track = function(name, url) {
+var Track = function(ctx, name, url) {
   var self = this;
+  this.ctx = ctx;
   this.name = name;
   this.sequencer = new euclid.Sequencer();
-  this.sampler = new Sampler(url);
+  this.sampler = new Sampler(ctx, url);
   this.sequencer.ontrigger = function() {
     self.sampler.play();
   }
@@ -48,12 +61,13 @@ Clock.prototype = {
   }
 };
 
-var tracks = [],
+var ctx = (window.AudioContext !== (void 0)) ? new AudioContext() : new webkitAudioContext(),
+    tracks = [],
     clock = new Clock();
-tracks.push(new Track("kick", "audio/kick.mp3"));
-tracks.push(new Track("snare", "audio/snare.mp3"));
-tracks.push(new Track("cl hat", "audio/close_hat.mp3"));
-tracks.push(new Track("op hat", "audio/open_hat.mp3"));
+tracks.push(new Track(ctx, "kick", "audio/kick.mp3"));
+tracks.push(new Track(ctx, "snare", "audio/snare.mp3"));
+tracks.push(new Track(ctx, "cl hat", "audio/close_hat.mp3"));
+tracks.push(new Track(ctx, "op hat", "audio/open_hat.mp3"));
 clock.ontick = function() {
   tracks.forEach(function(track) {
     track.sequencer.next();
@@ -65,7 +79,7 @@ app.controller("MasterCtrl", function($scope) {
   var bpm2ms = function(bpm) {
     return ((60 * 1000) / bpm) / 8;
   };
-  $scope.bpm = 120;
+  $scope.bpm = 80;
   clock.setInterval(bpm2ms($scope.bpm));
   $scope.onoff = false;
   $scope.resetting = false;

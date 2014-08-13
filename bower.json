@@ -15,6 +15,7 @@
   ],
   "dependencies": {
     "angular": "*",
+    "angular-touch": "*",
     "venturocket-angular-slider": "*"
   }
 }
